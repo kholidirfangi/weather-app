@@ -2,20 +2,18 @@ import type { weatherParams } from "../types/weather.type";
 
 interface BannerParams {
   weather: weatherParams | null;
+  isLoading: boolean;
 }
 
-const Banner = ({ weather }: BannerParams) => {
+const Banner = ({ weather, isLoading }: BannerParams) => {
   // Fungsi untuk format tanggal dengan pengecekan
-  const formatDate = (
-    dateString: string | undefined,
-    timezone: string | undefined
-  ): string => {
-    if (!dateString) return "-";
+  const formatDate = (dateString: string, timezone: string): string => {
+    if (!dateString) return "";
 
     try {
       const date = new Date(dateString);
 
-      if (isNaN(date.getTime())) return "-";
+      if (isNaN(date.getTime())) return "";
 
       return new Intl.DateTimeFormat("id-ID", {
         weekday: "long",
@@ -25,31 +23,47 @@ const Banner = ({ weather }: BannerParams) => {
         timeZone: timezone,
       }).format(date);
     } catch {
-      return "-";
+      return "";
     }
   };
 
   const formattedDate = formatDate(
-    weather?.weather.current.time,
-    weather?.location.timezone
+    weather?.weather.current.time ?? "",
+    weather?.location.timezone ?? ""
   );
-  return (
-    <div className="mt-5 flex flex-col justify-center items-center relative mx-auto w-full">
-      <picture className="w-full">
+  return isLoading ? (
+    <div
+      className={`w-full h-72 xl:h-[276px] bg-neutral-800 border-2 border-neutral-600 rounded-2xl mt-5 flex flex-col justify-center items-center relative mx-auto text-white`}
+    >
+      <div className="flex gap-2 mb-2">
+        <div className="w-3 h-3 rounded-full bg-neutral-500 animate-pulse"></div>
+        <div className="w-3 h-3 rounded-full bg-neutral-500 animate-pulse -mt-2"></div>
+        <div className="w-3 h-3 rounded-full bg-neutral-500 animate-pulse"></div>
+      </div>
+      Loading...
+    </div>
+  ) : (
+    <div
+      className={`w-full h-72 xl:h-[276px] rounded-xl mt-5 flex flex-col justify-center items-center relative mx-auto`}
+    >
+      <picture>
         <source
           media="(min-width: 800px)"
           srcSet="./assets/images/bg-today-large.svg"
         />
         <img
-          className="w-full"
+          className="w-full h-full"
           src="./assets/images/bg-today-small.svg"
           alt="banner"
         />
       </picture>
+
       <div className="w-full top-8 md:top-12 xl:top-auto absolute text-center md:items-center md:justify-between flex flex-col md:flex-row md:px-10 px-5">
         <div>
           <h2 className="text-white font-display-secondary text-2xl font-semibold mb-2">
-            {`${weather?.location.name}, ${weather?.location.country}`}
+            {`${weather?.location.name ?? ""}, ${
+              weather?.location.country ?? ""
+            }`}
           </h2>
           <p className="text-neutral-200">{formattedDate}</p>
         </div>

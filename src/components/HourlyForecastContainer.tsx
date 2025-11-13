@@ -94,14 +94,33 @@ interface HourlyForecastBoxProps {
   image: string;
   text: string;
   temp: string;
+  isLoading: boolean;
 }
 
 interface HourlyForecastContainerProps {
   weather: OpenMeteoResponse | null;
+  isLoading: boolean;
 }
 
-const HourlyForecastBox = ({ image, text, temp }: HourlyForecastBoxProps) => {
-  return (
+const HourlyForecastBox = ({
+  image,
+  text,
+  temp,
+  isLoading,
+}: HourlyForecastBoxProps) => {
+  return isLoading ? (
+    <div className="flex justify-between items-center h-12 bg-neutral-700 px-2 py-1 rounded-xl mt-4 animate-fadeIn">
+      {/* <div className="flex gap-5 items-center">
+        <img
+          className="w-10"
+          src={`./assets/images/icon-${image}.webp`}
+          alt={`icon-${image}`}
+        />
+        <div>{text}</div>
+      </div>
+      <div>{temp}</div> */}
+    </div>
+  ) : (
     <div className="flex justify-between items-center bg-neutral-700 px-2 py-1 rounded-xl mt-4 animate-fadeIn">
       <div className="flex gap-5 items-center">
         <img
@@ -116,7 +135,10 @@ const HourlyForecastBox = ({ image, text, temp }: HourlyForecastBoxProps) => {
   );
 };
 
-const HourlyForecastContainer = ({ weather }: HourlyForecastContainerProps) => {
+const HourlyForecastContainer = ({
+  weather,
+  isLoading,
+}: HourlyForecastContainerProps) => {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -261,8 +283,41 @@ const HourlyForecastContainer = ({ weather }: HourlyForecastContainerProps) => {
     }
   };
 
+  if (isLoading && !weather) {
+    return (
+      <div className="mt-5 flex justify-center">
+        <div className="max-w-2xl w-full text-white p-5 bg-neutral-800 rounded-xl">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-xl font-semibold">Ramalan perjam</h3>
+            <div className="flex items-center justify-end min-w-[120px] h-9 rounded-lg bg-neutral-600 pe-4">
+              <img src="./assets/images/icon-dropdown.svg" alt="" />
+            </div>
+          </div>
+
+          {/* Skeleton untuk 8 item */}
+          {Array.from({ length: 8 }).map((_, index) => (
+            <HourlyForecastBox
+              key={index}
+              isLoading={true}
+              image=""
+              temp=""
+              text=""
+            />
+          ))}
+
+          {/* Skeleton Pagination */}
+          <div className="flex justify-between items-center mt-8">
+            <div className="h-8 w-28 bg-neutral-700 rounded-lg animate-pulse"></div>
+            <div className="h-4 w-12 bg-neutral-700 rounded animate-pulse"></div>
+            <div className="h-8 w-28 bg-neutral-700 rounded-lg animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (!weather) {
-    return <div className="text-white text-center">Loading...</div>;
+    return null;
   }
 
   return (
@@ -288,6 +343,7 @@ const HourlyForecastContainer = ({ weather }: HourlyForecastContainerProps) => {
           {currentHourlyData.length > 0 ? (
             currentHourlyData.map((data, index) => (
               <HourlyForecastBox
+                isLoading={false}
                 key={`${currentPage}-${index}`}
                 image={getWeatherIcon(data.weatherCode)}
                 temp={data.temp}
@@ -303,7 +359,7 @@ const HourlyForecastContainer = ({ weather }: HourlyForecastContainerProps) => {
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div className="flex justify-between items-center mt-6">
+          <div className="flex justify-between items-center mt-8">
             <button
               type="button"
               onClick={goToPrevPage}

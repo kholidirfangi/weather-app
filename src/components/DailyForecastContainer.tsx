@@ -2,6 +2,7 @@ import type { OpenMeteoResponse } from "../types/weather.type";
 
 interface DailyForecastContainerProps {
   weather: OpenMeteoResponse | null;
+  isLoading: boolean;
 }
 
 interface DailyForecastBoxProps {
@@ -10,6 +11,7 @@ interface DailyForecastBoxProps {
   day: string;
   minTemp: number;
   maxTemp: number;
+  isLoading: boolean;
 }
 
 const DailyForecastBox = ({
@@ -17,8 +19,11 @@ const DailyForecastBox = ({
   day,
   minTemp,
   maxTemp,
+  isLoading,
 }: DailyForecastBoxProps) => {
-  return (
+  return isLoading ? (
+    <div className="bg-neutral-800 border-2 border-neutral-600 h-40 rounded-xl"></div>
+  ) : (
     <div className="bg-neutral-800 p-2 rounded-xl border-2 border-neutral-600 text-white font-display">
       <p className="text-center">{day}</p>
       <img
@@ -34,7 +39,34 @@ const DailyForecastBox = ({
   );
 };
 
-const DailyForecastContainer = ({ weather }: DailyForecastContainerProps) => {
+const DailyForecastContainer = ({
+  weather,
+  isLoading,
+}: DailyForecastContainerProps) => {
+  if (isLoading && !weather) {
+    return (
+      <div>
+        <h3 className="text-white text-xl mt-8 mb-5 font-display-secondary">
+          Ramalan harian
+        </h3>
+        <div className="grid grid-cols-3 grid-rows-3 gap-2 md:grid-rows-2 md:grid-cols-4 xl:grid-rows-1 xl:grid-cols-7">
+          {/* <div className="bg-neutral-800 border-2 border-neutral-600 h-40 rounded-xl"></div> */}
+          {Array.from({ length: 7 }).map((_, index) => (
+            <DailyForecastBox
+              key={index}
+              isLoading={true}
+              weather={null}
+              image={""}
+              day={""}
+              minTemp={0}
+              maxTemp={0}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (!weather?.daily) return null;
   return (
     <div>
@@ -101,6 +133,7 @@ const DailyForecastContainer = ({ weather }: DailyForecastContainerProps) => {
 
           return (
             <DailyForecastBox
+              isLoading={false}
               key={date}
               image={image}
               day={index === 0 ? "Hari Ini" : dayName}

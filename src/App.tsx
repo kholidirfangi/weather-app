@@ -16,6 +16,7 @@ function App() {
   const [weather, setWeather] = useState<weatherParams | null>(null);
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const [temperatureUnit, setTemperatureUnit] = useState(0); // 0 = Celsius, 1 = Fahrenheit
   const [windSpeedUnit, setWindSpeedUnit] = useState(0); // 0 = km, 1 = mph
   const [precipitationUnit, setPrecipitationUnit] = useState(0); // 0 = mm, 1 = inchi
@@ -50,7 +51,7 @@ function App() {
   const handleSearch = async () => {
     if (city.trim()) {
       try {
-        setIsLoading(true);
+        setIsSearching(true);
         const data = await getWeatherAPI({
           city,
           temperatureUnit: temperatureUnit,
@@ -69,7 +70,7 @@ function App() {
         setError("Data tidak ditemukan");
         setWeather(null);
       } finally {
-        setIsLoading(false);
+        setIsSearching(false);
         setCity("");
       }
     }
@@ -90,7 +91,12 @@ function App() {
       <main className="p-5">
         <Hero />
         <div className="flex flex-col gap-4 xl:flex-row xl:gap-5 xl:px-32 justify-center w-full items-center">
-          <SearchInput city={city} setCity={setCity} onSearch={handleSearch} />
+          <SearchInput
+            city={city}
+            setCity={setCity}
+            onSearch={handleSearch}
+            isSearching={isSearching}
+          />
           <SearchButton onClick={handleSearch} />
         </div>
         {/* content */}
@@ -99,28 +105,22 @@ function App() {
             Data tidak ditemukan
           </div>
         ) : (
-          <>
-            {isLoading ? (
-              <div className="flex justify-center items-center scale-200 mt-20 animate-spin">
-                <img
-                  src="./assets/images/icon-loading.svg"
-                  alt="icon-loading"
-                />
-              </div>
-            ) : (
-              <div className="flex flex-col xl:flex-row xl:gap-5">
-                <div className="w-full xl:w-4/6">
-                  <Banner weather={weather} />
-                  <HeatIndexBoxContainer weather={weather?.weather || null} />
-                  <DailyForecastContainer weather={weather?.weather || null} />
-                </div>
-
-                <div className="w-full xl:w-2/6">
-                  <HourlyForecastContainer weather={weather?.weather || null} />
-                </div>
-              </div>
-            )}
-          </>
+          <div className="flex flex-col xl:flex-row xl:gap-5">
+            <div className="w-full xl:w-4/6">
+              <Banner weather={weather} isLoading={isLoading} />
+              <HeatIndexBoxContainer
+                weather={weather?.weather || null}
+                isLoading={isLoading}
+              />
+              <DailyForecastContainer weather={weather?.weather || null} isLoading={isLoading} />
+            </div>
+            <div className="w-full xl:w-2/6">
+              <HourlyForecastContainer
+                weather={weather?.weather || null}
+                isLoading={isLoading}
+              />
+            </div>
+          </div>
         )}
       </main>
     </div>
