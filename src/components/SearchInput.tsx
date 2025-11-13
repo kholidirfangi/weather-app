@@ -18,7 +18,7 @@ const SearchInput = ({ city, setCity, onSearch, isSearching }: Params) => {
     }
   };
   return (
-    <div className="relative">
+    <div className="relative w-full xl:w-auto">
       <form className="flex gap-5 justify-start w-full bg-neutral-600 h-12 px-6 rounded-xl xl:w-96">
         <img className="w-4" src="./assets/images/icon-search.svg" alt="" />
         <input

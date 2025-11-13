@@ -33,7 +33,7 @@ const Banner = ({ weather, isLoading }: BannerParams) => {
   );
   return isLoading ? (
     <div
-      className={`w-full h-72 xl:h-[276px] bg-neutral-800 border-2 border-neutral-600 rounded-2xl mt-5 flex flex-col justify-center items-center relative mx-auto text-white`}
+      className={`w-full h-72 xl:h-[276px] bg-neutral-800 border-2 border-neutral-600 rounded-2xl mt-5 flex flex-col justify-center items-center relative mx-auto text-white animate-pulse`}
     >
       <div className="flex gap-2 mb-2">
         <div className="w-3 h-3 rounded-full bg-neutral-500 animate-pulse"></div>

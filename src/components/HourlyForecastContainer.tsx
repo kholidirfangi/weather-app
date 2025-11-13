@@ -109,7 +109,7 @@ const HourlyForecastBox = ({
   isLoading,
 }: HourlyForecastBoxProps) => {
   return isLoading ? (
-    <div className="flex justify-between items-center h-12 bg-neutral-700 px-2 py-1 rounded-xl mt-4 animate-fadeIn">
+    <div className="flex justify-between items-center h-12 bg-neutral-700 px-2 py-1 rounded-xl mt-4 animate-pulse">
       {/* <div className="flex gap-5 items-center">
         <img
           className="w-10"
@@ -289,7 +289,7 @@ const HourlyForecastContainer = ({
         <div className="max-w-2xl w-full text-white p-5 bg-neutral-800 rounded-xl">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-xl font-semibold">Ramalan perjam</h3>
-            <div className="flex items-center justify-end min-w-[120px] h-9 rounded-lg bg-neutral-600 pe-4">
+            <div className="flex items-center justify-end min-w-[120px] h-9 rounded-lg bg-neutral-600 pe-4 animate-pulse">
               <img src="./assets/images/icon-dropdown.svg" alt="" />
             </div>
           </div>

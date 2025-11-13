@@ -22,7 +22,7 @@ const DailyForecastBox = ({
   isLoading,
 }: DailyForecastBoxProps) => {
   return isLoading ? (
-    <div className="bg-neutral-800 border-2 border-neutral-600 h-40 rounded-xl"></div>
+    <div className="bg-neutral-800 border-2 border-neutral-600 h-40 rounded-xl animate-pulse"></div>
   ) : (
     <div className="bg-neutral-800 p-2 rounded-xl border-2 border-neutral-600 text-white font-display">
       <p className="text-center">{day}</p>

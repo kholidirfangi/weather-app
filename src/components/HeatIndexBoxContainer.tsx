@@ -13,7 +13,7 @@ interface HeatIndexBoxProps {
 
 const HeatIndexBox = ({ name, value, isLoading }: HeatIndexBoxProps) => {
   return isLoading ? (
-    <div className="flex flex-col gap-5 bg-neutral-800 p-5 rounded-xl border-2 border-neutral-600 text-white font-display">
+    <div className="flex flex-col gap-5 bg-neutral-800 p-5 rounded-xl border-2 border-neutral-600 text-white font-display animate-pulse">
       <div>{name}</div>
       <div className="text-3xl">-</div>
     </div>
