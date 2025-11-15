@@ -39,8 +39,7 @@ Users should be able to:
 
 ![desktop view](public/assets/screenshot/desktop%20view.png)
 ![desktop view](public/assets/screenshot/desktop%20view%201.png)
-![mobile view](public/assets/screenshot/mobile%20view.png)
-![mobile view](public/assets/screenshot/mobile%20view%201.png)
+![mobile view](public/assets/screenshot/mobile%20view.png)(public/assets/screenshot/mobile%20view%201.png)
 ![mobile view](public/assets/screenshot/mobile%20view%202.png)
 ![loading view](public/assets/screenshot/loading%20view.png)
 ![error view](public/assets/screenshot/error%20view.png)
