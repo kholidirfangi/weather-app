@@ -46,8 +46,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [solution](https://github.com/kholidirfangi/weather-app)
-- Live Site URL: [live site](https://weather-app-amber-seven-14.vercel.app/)
+- Solution URL: [](https://github.com/kholidirfangi/weather-app)
+- Live Site URL: [](https://weather-app-amber-seven-14.vercel.app/)
 
 ## My process
 - Setup project with Vite, React, Typescript, and Tailwindcss
@@ -74,10 +74,10 @@ First I create ui before the interactivity. I create ui with mobile first, and t
 - Vite
 - Open Meteo
 - [React](https://reactjs.org/) - JS library
-- [Typescript](https://www.typescriptlang.org/) - JS with types syntax
-- [Tailwindcss](https://tailwindcss.com/) - CSS Framework
-- [Vite](https://vite.dev/) - Build Tool
-- [Open-Meteo](https://open-meteo.com/) - Weather API
+- [Typescript] (https://www.typescriptlang.org/) - JS with types syntax
+- [Tailwindcss] (https://tailwindcss.com/) - CSS Framework
+- [Vite] (https://vite.dev/) - Build Tool
+- [Open-Meteo] (https://open-meteo.com/) - Weather API
 
 ### What I learned
 
@@ -96,6 +96,6 @@ This challenge is so good for my experience, but I realize this is not enough. S
 
 - Website - [Kholid Irfangi](https://new-portfolio-lovat-kappa.vercel.app/)
 - Frontend Mentor - [@kholidirfangi](https://www.frontendmentor.io/profile/kholidirfangi)
-- LinkedIn - [@kholidirfangi](https://www.linkedin.com/in/kholid-irfangi-4394a71a6/)
+- LinkedIn - [@kholidirfangi] (https://www.linkedin.com/in/kholid-irfangi-4394a71a6/)
 
 
