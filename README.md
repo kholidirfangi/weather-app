@@ -91,7 +91,7 @@ I learn a lot from this challenge. And this is some major
 
 ### Continued development
 
-This challenge is so goog for my experience, but I realize this is not enough. So therefore I will create a new project and learn again. This is a journey. I will continue to next trip..
+This challenge is so good for my experience, but I realize this is not enough. So therefore I will create a new project and learn again. This is a journey. I will continue to next trip..
 
 ## Author
 
